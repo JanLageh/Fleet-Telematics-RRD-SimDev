@@ -10,24 +10,25 @@ import { ThermalMap } from './components/ThermalMap';
 import { BatteryHealthChart } from './components/BatteryHealthChart';
 import { RegenBrakingPanel } from './components/RegenBrakingPanel';
 import { ChargingPanel } from './components/ChargingPanel';
+import { LoginPage } from './components/LoginPage';
 
 // ── Static route data (Portland → Bend, GT-6 Corridor) ─────────────────
 const TOTAL_DISTANCE = 129.4;
 
 const ELEVATION_DATA = [
-    { distance: 0,     elevation: 15 },
-    { distance: 10,    elevation: 45 },
-    { distance: 20,    elevation: 220 },
-    { distance: 30,    elevation: 850 },
-    { distance: 40,    elevation: 1260 },
-    { distance: 50,    elevation: 1490 }, // Summit (Govt Camp)
-    { distance: 60,    elevation: 1180 }, // Descent
-    { distance: 70,    elevation: 720 },  // Plateau
-    { distance: 80,    elevation: 480 },
-    { distance: 90,    elevation: 320 },
-    { distance: 100,   elevation: 260 },
-    { distance: 110,   elevation: 210 },
-    { distance: 120,   elevation: 190 },
+    { distance: 0, elevation: 15 },
+    { distance: 10, elevation: 45 },
+    { distance: 20, elevation: 220 },
+    { distance: 30, elevation: 850 },
+    { distance: 40, elevation: 1260 },
+    { distance: 50, elevation: 1490 }, // Summit (Govt Camp)
+    { distance: 60, elevation: 1180 }, // Descent
+    { distance: 70, elevation: 720 },  // Plateau
+    { distance: 80, elevation: 480 },
+    { distance: 90, elevation: 320 },
+    { distance: 100, elevation: 260 },
+    { distance: 110, elevation: 210 },
+    { distance: 120, elevation: 190 },
     { distance: 129.4, elevation: 182 },
 ];
 
@@ -98,6 +99,8 @@ function buildThermalGrid(baseTempC: number, drivingStyle: DrivingStyle, progres
 
 // ──────────────────────────────────────────────────────────────────────────
 function App() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     const { vehicles, telemetry, simulation, loading, error, isSimulating, runSimulation } = useFleetData();
 
     const [selectedVehicleId, setSelectedVehicleId] = useState<string | null>('EV-001');
@@ -214,6 +217,11 @@ function App() {
             regen_level: regenLevel,
         });
     };
+
+    // ── Gate: show login until authenticated ─────────────────────────────
+    if (!isLoggedIn) {
+        return <LoginPage onLogin={() => setIsLoggedIn(true)} />;
+    }
 
     return (
         <div className="dashboard">
