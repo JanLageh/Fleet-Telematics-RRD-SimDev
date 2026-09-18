@@ -1,5 +1,6 @@
 import '../LoginPage.css';
 import { useState } from 'react';
+import { PurposeProject } from './PurposeProject';
 
 interface LoginPageProps {
     onLogin: (username: string, password: string) => void;
@@ -32,6 +33,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
 
     return (
         <div className='login-page'>
+            <PurposeProject />
             <div className='login-card'>
                 <div className='login-logo'>:rocket</div>
                 <div className='login-logo-title'> Fleet Telematics</div>
@@ -50,7 +52,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
                         />
                     </div>
                     <div className='login-field'>
-                        <label className='loginlabel' htmlFor='password'>Password</label>
+                        <label className='login-label' htmlFor='password'>Password</label>
                         <input
                             id='password'
                             type="password"
@@ -71,7 +73,7 @@ export function LoginPage({ onLogin }: LoginPageProps) {
                     </button>
                 </form>
             </div>
-        </div>
+        </div >
 
     );
 }

@@ -1,0 +1,95 @@
+.purpose-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10% 0 6%;
+    max-width: 560px;
+    animation: purposeFadeIn 0.8s ease both;
+    background-color: rgb(246, 247, 244);
+    border-radius: 25px;
+    height: 100%;
+    width: 100%;
+
+}
+
+@keyframes purposeFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.purpose-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-cyan);
+    background: rgba(0, 194, 255, 0.1);
+    border: 1px solid rgba(0, 194, 255, 0.25);
+    border-radius: 999px;
+    padding: 4px 14px;
+    margin-bottom: 20px;
+    width: fit-content;
+}
+
+.purpose-title {
+    font-size: 2.6rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #5f92d7;
+    margin: 0 0 18px 0;
+    line-height: 1.15;
+}
+
+.purpose-title-accent {
+    color: var(--accent-cyan, #00c2ff);
+}
+
+.purpose-description {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: black;
+    margin: 0 0 32px 0;
+    max-width: 440px;
+}
+
+/* Feature list */
+.purpose-features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.purpose-feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.purpose-feature-item strong {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--text-primary, #e8f4ff);
+    margin-bottom: 3px;
+}
+
+.purpose-feature-item p {
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--text-secondary, #8bacc8);
+    line-height: 1.55;
+}

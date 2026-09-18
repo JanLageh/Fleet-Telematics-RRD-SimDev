@@ -1,13 +1,13 @@
 .login-page {
     display: flex;
     align-items: center;
-    justify-content: center;
+    align-content: center;
+    justify-content: space-around;
     height: 100vh;
-    background-image: var(--bg-primary);
-    background-image:
-        linear-gradient(rgba(0, 194, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 194, 255, 0.03) 1px, transparent 1px);
+    background-color: lab(81.31% 0.25 -2.73);
     background-size: 40px 40px;
+    flex-direction: row-reverse;
+    gap: 1px;
 }
 
 .login-card {
@@ -17,7 +17,8 @@
     padding: 40px 48px;
     width: 100%;
     max-width: 420px;
-    box-shadow: 0 0 40px rgba(0, 194, 255, 0.6), var(--shadow-panel);
+    flex-shrink: 0;
+    background-color: rgb(224, 229, 233);
 }
 
 .login-logo {
@@ -62,12 +63,12 @@
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--text-secondary);
+    color: black;
 }
 
 .login-input {
-    background: var(--bg-input);
-    border: 1px solid var (--boreder-color);
+    background: white;
+    border: 1px solid var (--border-color);
     border-radius: var(-radius-sm);
     color: var(--text-primary);
     font-family: var(--font-sans);
@@ -79,7 +80,7 @@
 
 .login-input:focus {
     border-color: var(--acccent-cyan);
-    box-shadow: 0 0 0 2px rgba(0, 194, 255, 0.15);
+    box-shadow: 0 0 0 2px rgb(241, 244, 245);
 }
 
 .login-input::placeholder {
