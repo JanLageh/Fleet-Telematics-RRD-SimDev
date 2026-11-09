@@ -20,6 +20,7 @@ import { ThermalMap } from './components/ThermalMap';
 import { BatteryHealthChart } from './components/BatteryHealthChart';
 import { RegenBrakingPanel } from './components/RegenBrakingPanel';
 import { ChargingPanel } from './components/ChargingPanel';
+import { LoginPage } from './components/LoginPage';
 import { ELEVATION_PROFILE, ROUTE_DISTANCE_KM, ROUTE_ELEVATION } from './routeData';
 import { GaragePlaceholder } from './components/garage/GarageLoading';
 
@@ -117,7 +118,8 @@ function buildThermalGrid(baseTempC: number, drivingStyle: DrivingStyle, progres
 
 // ──────────────────────────────────────────────────────────────────────────
 function App() {
-    const { vehicles, telemetry, simulation, loading, error, isSimulating, runSimulation } = useFleetData();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const { vehicles, telemetry, assessment, loading, error, simulationError, dataStatus, readingTime, lastFetchedAt, isSimulating, runSimulation, runBatchSimulation, getSimulationHistory, historyVersion, createVehicle, updateVehicle, deleteVehicle } = useFleetData();
 
     const [requestedVehicleId, setSelectedVehicleId] = useState<string | null>(null);
     const selectedVehicleId = vehicles.some(vehicle => vehicle.id === requestedVehicleId)
@@ -271,6 +273,48 @@ function App() {
             regen_level: regenLevel,
         });
     };
+
+    // The fleet starts empty; planner, route and battery need a vehicle to show anything real.
+    // Vehicles, dashboard and garage render their own empty states.
+    const content = !loading && vehicles.length === 0 && page !== 'vehicles' && page !== 'dashboard' && page !== 'garage'
+        ? 'empty' : page;
+    const fleetEmpty = !loading && vehicles.length === 0;
+    const openGarage = () => { window.location.hash = '#/garage'; };
+
+    const vehiclePicker = (
+        <label className="page-vehicle-picker">
+            <span>Vehicle</span>
+            <select value={selectedVehicleId ?? ''} onChange={e => setSelectedVehicleId(e.target.value)}>
+                {vehicles.map(v => <option key={v.id} value={v.id}>{v.id} · {v.model}</option>)}
+            </select>
+        </label>
+    );
+
+    const mapPanel = (
+        <MapPanel
+            vehicles={vehicles}
+            telemetry={telemetry}
+            dataStatus={dataStatus}
+            selectedVehicleId={selectedVehicleId}
+            selectedStationId={selectedStationId}
+            progressFraction={progressFraction}
+            onSelectVehicle={setSelectedVehicleId}
+            onSelectStation={setSelectedStationId}
+            onProgressChange={setProgressFraction}
+        />
+    );
+
+    const assessmentHistory = selectedVehicleId && (
+        <AssessmentHistory
+            vehicleId={selectedVehicleId}
+            refreshKey={historyVersion}
+            loadHistory={getSimulationHistory}
+        />
+    );
+
+    if (!isLoggedIn) {
+        return <LoginPage onLogin={() => setIsLoggedIn(true)} />;
+    }
 
     return (
         <div className="app-shell">

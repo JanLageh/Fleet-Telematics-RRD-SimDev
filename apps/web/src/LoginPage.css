@@ -32,7 +32,7 @@
 }
 
 .login-logo-title {
-    font-family: 1.1rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--accent-cyan);
     letter-spacing: 0.12em;
@@ -68,18 +68,18 @@
 
 .login-input {
     background: white;
-    border: 1px solid var (--border-color);
-    border-radius: var(-radius-sm);
-    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: #0f172a;
     font-family: var(--font-sans);
     font-size: 0.85rem;
     padding: 10px 12px;
     outline: none;
-    transition: border-color 0.2s, box-shadow 0.2x;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .login-input:focus {
-    border-color: var(--acccent-cyan);
+    border-color: var(--accent-cyan);
     box-shadow: 0 0 0 2px rgb(241, 244, 245);
 }
 

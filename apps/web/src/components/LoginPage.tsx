@@ -35,9 +35,11 @@ export function LoginPage({ onLogin }: LoginPageProps) {
         <div className='login-page'>
             <PurposeProject />
             <div className='login-card'>
-                <div className='login-logo'>:rocket</div>
-                <div className='login-logo-title'> Fleet Telematics</div>
-                <div className='login-logo-subtitle'>BRD Simulation Platform</div>
+                <div className='login-logo'>
+                    <div className='login-logo-icon'>🚀</div>
+                    <div className='login-logo-title'>Fleet Telematics</div>
+                    <div className='login-logo-subtitle'>BRD Simulation Platform</div>
+                </div>
 
                 <form className='login-form' onSubmit={handleSubmit}>
                     <div className='login-field'>
